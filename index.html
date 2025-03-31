@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rajeev | The Journey of a Dreamer & Doer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #1e1e1e;
+            color: #e0e0e0;
+            transition: background 0.5s, color 0.5s;
+        }
+
+        /* Light Mode */
+        body.light-mode {
+            background: #f5f5f5;
+            color: #222;
+        }
+
+        /* Parallax Effect */
+        .parallax {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: linear-gradient(135deg, #6a0dad, #333);
+            z-index: -1;
+            transition: background 0.5s;
+        }
+
+        .light-mode .parallax {
+            background: linear-gradient(135deg, #c89bff, #ddd);
+        }
+
+        /* Navbar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            transition: background 0.5s;
+            z-index: 100;
+        }
+
+        .light-mode .navbar {
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #d1a7ff;
+        }
+
+        .light-mode .logo {
+            color: #6a0dad;
+        }
+
+        /* Navbar Links */
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #e0e0e0;
+            font-size: 18px;
+            font-weight: 600;
+            padding: 5px;
+            transition: color 0.3s;
+        }
+
+        .light-mode .nav-links a {
+            color: #222;
+        }
+
+        .nav-links a:hover {
+            color: #d1a7ff;
+        }
+
+        /* Hamburger Menu */
+        .hamburger {
+            display: none;
+            font-size: 30px;
+            cursor: pointer;
+            color: #d1a7ff;
+        }
+
+        .light-mode .hamburger {
+            color: #6a0dad;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 60px;
+                right: 0;
+                background: rgba(0, 0, 0, 0.9);
+                width: 200px;
+                padding: 10px;
+                border-radius: 5px;
+            }
+
+            .light-mode .nav-links {
+                background: rgba(255, 255, 255, 0.9);
+            }
+
+            .nav-links a {
+                display: block;
+                padding: 10px;
+                text-align: center;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+        }
+
+        /* Sections */
+        .section {
+            padding: 50px 20px;
+            margin: 40px auto;
+            text-align: center;
+            max-width: 800px;
+            border-radius: 15px;
+            border: 2px solid rgba(209, 167, 255, 0.5);
+            background: rgba(40, 40, 40, 0.9);
+            transition: background 0.5s;
+        }
+
+        .light-mode .section {
+            background: #fdfdfd;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+            color: #d1a7ff;
+        }
+
+        .light-mode h1 {
+            color: #6a0dad;
+        }
+
+        p {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: #cccccc;
+        }
+
+        .light-mode p {
+            color: #333;
+        }
+        .socials {
+            display: flex;
+            gap: 25px; /* Increased gap between icons */
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .socials a {
+            text-decoration: none;
+            font-size: 40px; /* Larger icon size */
+            color: #d1a7ff; /* Icon color */
+            transition: color 0.3s, transform 0.3s;
+        }
+
+        .socials a:hover {
+            color: #6a0dad; /* Hover color */
+            transform: scale(1.2); /* Increased hover effect size */
+        }
+
+
+        /* Theme Toggle Button */
+        .theme-button {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: linear-gradient(135deg, #8a2be2, #d1a7ff);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 20px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+            z-index: 150;
+        }
+
+        .theme-button:hover {
+            background: linear-gradient(135deg, #d1a7ff, #8a2be2);
+            transform: scale(1.1);
+        }
+
+        .light-mode .theme-button {
+            background: black;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Parallax Background -->
+    <div class="parallax"></div>
+
+    <!-- Navbar -->
+    <div class="navbar">
+        <div class="logo">Rajeev's Space</div>
+        <div class="hamburger" onclick="toggleMenu()">☰</div>
+        <div class="nav-links">
+            <a href="#about">About Me</a>
+            <a href="#interests">My Interests</a>
+            <a href="#contact">Contact Me</a>
+        </div>
+    </div>
+
+    <!-- About Me -->
+    <div id="about" class="section">
+        <h1>💡 Who Am I?</h1>
+        <h2>Hi, I am <strong>Rajeev</strong></h2>
+    
+        <p>  
+            An aspiring <strong>NDA Cadet</strong>, a <strong>tech and military enthusiast</strong>, a <strong>guitarist</strong>, 
+            a <strong>poet</strong>, a <strong>programmer</strong>, and above all, someone who refuses to be put into a box.  
+            I am a seeker of knowledge, a builder of ideas, and a believer in the power of persistence.  
+        </p>
+    
+        <p>  
+            I believe that life isn’t about choosing just one path. Why limit yourself to a single skill, a single dream,  
+            or a single way of thinking? For as long as I can remember, I’ve been drawn to <strong>many things at once</strong>— 
+            technology, music, philosophy, geopolitics, science, and the art of storytelling.  
+        </p>
+    
+        <p>  
+            Society often tells us to “specialize” in one field, but I find joy in weaving together multiple disciplines,  
+            letting them collide and create something unique.  
+        </p>
+    
+        <p>  
+            As they say,  
+            <em>"Jack of all trades is master of none, but often better than master of one."</em>  
+            That phrase defines me perfectly.  
+        </p>
+    
+        <h2>📌 What Drives Me?</h2>
+    
+        <p>  
+            For me, life is an <strong>experiment</strong>, and I am the scientist of my own existence.  
+            Every day, I try to build something new—whether it’s a project, a skill, or a better version of myself.  
+        </p>
+    
+        <p>  
+            🔹 <strong>Technology excites me.</strong>  
+            I love breaking things apart, understanding how they work, and rebuilding them in my own way.  
+            From <strong>game development</strong> to <strong>AI</strong>, from <strong>hardware tinkering</strong> to <strong>web design</strong>,  
+            I see code as more than just syntax; it’s a tool to bring ideas to life.  
+        </p>
+    
+        <p>  
+            🎸 <strong>Music moves me.</strong>  
+            There’s something raw and powerful about playing the guitar,  
+            feeling the vibrations of each note, and letting music speak where words fail.  
+            It’s not just sound—it’s <strong>emotion in its purest form</strong>.  
+        </p>
+    
+        <p>  
+            ✍️ <strong>Poetry helps me express what I can’t say out loud.</strong>  
+            Some thoughts are too deep, too fragile to be spoken in casual conversation.  
+            So, I write them instead.  
+            In ink and rhythm, I carve out my emotions, hoping that maybe, someone else will find meaning in them too.  
+        </p>
+    
+        <p>  
+            ⚔️ <strong>The military has always fascinated me.</strong>  
+            Not just the tactics and weapons, but the <strong>discipline, the courage, and the idea of dedicating oneself to something greater than personal gain</strong>.  
+            It’s why I want to join the <strong>NDA</strong>—not just as a career choice, but as a way of life.  
+        </p>
+    
+        <h2>🌎 My Philosophy</h2>
+    
+        <p>  
+            I don’t believe in luck. I believe in <strong>preparation meeting opportunity</strong>.  
+            I don’t believe in overnight success. I believe in <strong>small, consistent efforts that compound over time</strong>.  
+            And I certainly don’t believe in limiting myself.  
+            The world is too big, life is too short, and curiosity is too precious to be wasted on a single path.  
+        </p>
+    
+        <p>  
+            I know that I am not perfect. I struggle, I fail, and I second-guess myself more times than I can count.  
+            But that’s what makes life interesting.  
+            <strong>Every failure is a lesson, every setback is a challenge, and every challenge is an opportunity.</strong>  
+        </p>
+    
+        <p>  
+            Some people measure success by wealth. Others by fame.  
+            For me, success is about <strong>growth—intellectual, emotional, and personal</strong>.  
+            If I wake up every day knowing more, feeling deeper, and becoming better than I was yesterday,  
+            then I am exactly where I need to be.  
+        </p>
+    
+        <h2>🤝 Let’s Talk… If You Want To.</h2>
+    
+        <p>  
+            Now, here’s the thing: <strong>I am not great at making friends.</strong>  
+            I overthink conversations, hesitate before reaching out, and sometimes, I let good people slip away.  
+        </p>
+    
+        <p>  
+            But deep down, I <strong>do want to connect.</strong>  
+            I believe that the right people cross our paths for a reason.  
+            And if you’re reading this—maybe, just maybe—you’re one of those people.  
+        </p>
+    
+        <p>  
+            So, if you feel like we could be friends, let’s talk.  
+            Maybe we’ll find common ground, or maybe we’ll just have an interesting conversation.  
+            Either way, I’d be happy to <strong>know you, understand your story, and share a bit of mine.</strong>  
+        </p>
+    
+        <h2>🌟 If You’re Still Reading…</h2>
+    
+        <p>  
+            Then maybe something in this page resonated with you.  
+            Maybe you found a piece of yourself in my words.  
+            Or maybe you’re just curious about the person behind them.  
+        </p>
+    
+        <p>  
+            Either way, I’d love to <strong>hear from you.</strong>  
+            Life is too short for missed connections.  
+            So, if you ever feel like reaching out, don’t hesitate.  
+        </p>
+    
+        <p>  
+            Let’s talk. Let’s connect. Let’s see where this conversation takes us.  
+        </p>
+    </div>
+    
+
+    <!-- Interests Section -->
+    <div id="interests" class="section">
+        <h1>🚀 My Interests</h1>
+        <p><strong>Coding</strong></p>
+        <p><strong>Gaming</strong></p>
+        <p><strong>Playing guitar</strong></p>
+        <p><strong>Maths and Science</strong></p>
+        <p><strong>Cars and Planes</strong></p>
+        <p><strong>Military</strong></p>
+        <p><strong>Cycling</strong></p>
+        <p><strong>Game development</strong></p>
+        <p><strong>Geopolitics</strong></p>
+        <p><strong>Poetry</strong></p>
+        
+        <p>I also like to make new projects and solve problems when I am bored </p>
+    </div>
+
+    <!-- Contact Section -->
+    <div id="contact" class="section">
+        <h1>📬 Contact Me</h1>
+        <p>Let's connect and share ideas!  </p>
+        <p>💭 Ever felt like reaching out but held back?<strong>Maybe now’s the time.</strong></p>
+
+            I love meeting like-minded people, whether it's about <strong>tech, music, poetry, or just life in general.</strong> If you ever want to chat, brainstorm ideas, or just <strong>catch up—I'm here.</strong>
+            
+            <p>🔹 Have a thought? Share it. </p>
+            <p>🔹 Have a question? Ask away.</p>
+            <p>🔹 Just want to say hi? I'd love that too.</p>
+            
+            And if you're reading this, maybe it's not by chance. <strong> Maybe we were meant to talk again.</strong></p>
+        <div class="socials">
+            <a href="https://twitter.com/LordRajeevRai" target="_blank">
+                <i class="fab fa-twitter"></i>
+            </a>
+            <a href="https://discord.gg/jukMECmH" target="_blank">
+                <i class="fab fa-discord"></i>
+            </a>
+            <a href="https://www.instagram.com/rajeevisdead" target="_blank">
+                <i class="fab fa-instagram"></i>
+            </a>
+        </div>
+    
+
+    <!-- Theme Toggle Button -->
+    <button class="theme-button" onclick="toggleTheme()">🌗 Change Theme</button>
+
+    <script>
+        function toggleTheme() {
+            document.body.classList.toggle('light-mode');
+        }
+
+        function toggleMenu() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        }
+    </script>
+
+</body>
+</html>
